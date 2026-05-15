@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SparkAI 创客火花 - AI视频分布式合伙人平台</title>
+  <style>
+    :root {
+      --bg: #0B0F19;
+      --surface: #1F2937;
+      --primary: #10B981;
+      --accent: #3B82F6;
+      --text: #F9FAFB;
+      --muted: #9CA3AF;
+      --border: #2b3648;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top right, #132036, var(--bg) 40%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+    .nav { position: sticky; top: 0; background: rgba(11,15,25,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); z-index: 10; }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; padding: 12px 0; }
+    .brand { font-weight: 800; letter-spacing:.5px; }
+    .brand span { color: var(--primary); }
+    .menu { display:flex; gap: 16px; font-size: 14px; color: var(--muted); }
+    .menu a { color: inherit; text-decoration:none; }
+    .menu a:hover { color: var(--text); }
+    section { padding: 48px 0; }
+    .card { background: linear-gradient(180deg, rgba(31,41,55,.96), rgba(20,27,40,.98)); border:1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+    .hero { display:grid; gap: 28px; align-items:center; grid-template-columns: 1.3fr 1fr; }
+    .hero h1 { font-size: clamp(28px, 4vw, 46px); line-height:1.2; margin:0 0 8px; }
+    .hero p { color: var(--muted); margin:0; }
+    .btn-row { display:flex; gap:12px; margin-top:18px; }
+    .btn { border:none; border-radius: 12px; padding: 12px 18px; font-weight:700; cursor:pointer; }
+    .btn-primary { background: var(--primary); color:#071310; }
+    .btn-secondary { background: transparent; border:1px solid var(--accent); color: var(--accent); }
+    .ticker { margin-top: 24px; overflow:hidden; border:1px solid var(--border); border-radius: 12px; }
+    .ticker-track { display:flex; gap:18px; padding: 10px 12px; white-space:nowrap; animation: move 24s linear infinite; }
+    .chip { background:#101827; border:1px solid #22304a; border-radius:999px; padding: 7px 12px; font-size:13px; color:#cfe3ff; }
+    @keyframes move { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .tags { display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
+    .tag { padding:8px 12px; border-radius: 10px; border:1px solid var(--border); background:#121925; color:var(--muted); font-size:14px; }
+    h2 { margin:0 0 16px; font-size: 28px; }
+    .filters { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+    .filter { background:#0f1728; border:1px solid #2a3850; color:#b9c5d8; padding:8px 12px; border-radius: 10px; font-size:13px; }
+    .project-card .head { display:flex; justify-content:space-between; color:#d8e4f7; font-size:14px; gap:12px; }
+    .project-card .title { font-size: 20px; margin: 16px 0; font-weight:700; }
+    .roles { display:flex; gap:8px; flex-wrap:wrap; margin: 8px 0; }
+    .pill { padding:7px 10px; border-radius:999px; font-size:13px; border:1px solid #31415e; }
+    .ok { color:#7de3b8; border-color:#1c7355; background:rgba(16,185,129,.12); }
+    .need { color:#d6e7ff; border-color:#3068be; background:rgba(59,130,246,.15); }
+    .meta { color: var(--muted); font-size:14px; margin: 6px 0; }
+    .right { text-align:right; }
+    .layout-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    input, select, textarea { width:100%; margin-top:6px; background:#0f1727; border:1px solid #334256; color:var(--text); border-radius:10px; padding:10px 12px; }
+    label { display:block; margin-bottom:12px; font-size:14px; color:#d5deea; }
+    .tabs { display:flex; gap:8px; margin-bottom:14px; }
+    .tab { border:1px solid #2e4059; padding:8px 10px; border-radius:9px; color:#bdd0ea; font-size:13px; }
+    .kpi { display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; }
+    .kpi .card { padding:14px; }
+    .kpi b { font-size:24px; color:var(--primary); }
+    @media (max-width: 860px) {
+      .hero, .layout-2, .kpi { grid-template-columns: 1fr; }
+      .menu { display:none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Spark<span>AI</span> 创客火花</div>
+      <nav class="menu">
+        <a href="#landing">首页</a>
+        <a href="#market">项目广场</a>
+        <a href="#create">发布项目</a>
+        <a href="#dashboard">工作室看板</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="landing">
+      <div class="hero">
+        <div>
+          <h1>一个人做不出爆款？<br>在这里，组建你的AI视频独立制片厂。</h1>
+          <p>实名认证 + 利益绑定 + 电子签约，用拼图式组队把想法变成可交付成片，5天内冲刺上线。</p>
+          <div class="btn-row">
+            <button class="btn btn-primary">立即发布项目</button>
+            <button class="btn btn-secondary">进入项目广场</button>
+          </div>
+          <div class="tags">
+            <span class="tag">AI国风微短剧</span>
+            <span class="tag">动漫推文</span>
+            <span class="tag">自媒体起号</span>
+            <span class="tag">商业广告</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Phase 1 快速闭环</h3>
+          <p class="meta">实名认证后可发布/申请，申请通过自动生成《线上协同合伙意向书》并手机签署，解锁联系方式。</p>
+          <p class="meta">模式A：纯分成制 · 模式B：底薪+提成</p>
+        </div>
+      </div>
+      <div class="ticker">
+        <div class="ticker-track">
+          <span class="chip">急缺：ComfyUI 工作流搭建师（国风短剧）</span>
+          <span class="chip">急缺：Runway 后期剪辑（商业广告）</span>
+          <span class="chip">急缺：Midjourney 分镜视觉（动漫推文）</span>
+          <span class="chip">急缺：Kling 动效师（自媒体起号）</span>
+          <span class="chip">急缺：ComfyUI 工作流搭建师（国风短剧）</span>
+          <span class="chip">急缺：Runway 后期剪辑（商业广告）</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="market">
+      <h2>项目广场</h2>
+      <div class="filters">
+        <span class="filter">角色：缺剪辑</span>
+        <span class="filter">角色：缺工作流搭建</span>
+        <span class="filter">赛道：AI国风微短剧</span>
+        <span class="filter">分配模式：纯分成</span>
+        <span class="filter">分配模式：有底薪</span>
+      </div>
+      <article class="card project-card">
+        <div class="head">
+          <span>[头像] 发起人：张三 (★ 4.9 靠谱分)</span>
+          <span>已实名认证 🛡️</span>
+        </div>
+        <div class="title">💡 项目：国风玄幻AI短剧《X风刀》第一集 Demo 制作 (长流/起号)</div>
+        <div>🧩 战队拼图进度：</div>
+        <div class="roles">
+          <span class="pill ok">🟢 编剧·已满</span>
+          <span class="pill need">⚪ AI画面生成师·急缺1人</span>
+          <span class="pill ok">🔵 后期剪辑·已满</span>
+        </div>
+        <p class="meta">要求：熟练掌握 ComfyUI 角色一致性工作流，能输出 4K 高清画面。</p>
+        <p class="meta">💰 利益分配：【纯分成模式】广告及分账收益按 2:5:3 比例绑定（系统签约）</p>
+        <p class="meta">⏱️ 周期：团队集结后 5 天内交付成片</p>
+        <p class="right"><button class="btn btn-primary">申请加入这个局</button></p>
+      </article>
+    </section>
+
+    <section id="create">
+      <h2>项目发布页</h2>
+      <div class="card">
+        <div class="layout-2">
+          <div>
+            <label>项目名称<input value="国风玄幻AI短剧 - 第1集" /></label>
+            <label>赛道分类<select><option>AI国风微短剧</option></select></label>
+            <label>短期目标描述<textarea rows="4">目标：5天内产出60秒可发布短剧Demo。</textarea></label>
+            <label>所需技术工种<input value="编剧、ComfyUI生成师、后期剪辑、运营" /></label>
+          </div>
+          <div>
+            <label>收益模式<select><option>模式A：纯分成制</option><option>模式B：底薪+提成</option></select></label>
+            <label>分成比例<input value="编剧20%、AI生成师40%、后期20%、运营20%" /></label>
+            <label>核心剧本大纲（盲盒保护）<textarea rows="6">公开仅展示设定，申请通过后解锁核心剧情与分镜细节。</textarea></label>
+            <button class="btn btn-primary">提交并发布项目</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard">
+      <h2>工作室看板</h2>
+      <div class="tabs">
+        <span class="tab">Tab 1：我发起的（主脑）</span>
+        <span class="tab">Tab 2：我加入的（搭档）</span>
+        <span class="tab">Tab 3：我的AI技能谱</span>
+      </div>
+      <div class="kpi">
+        <div class="card"><div class="meta">我发起的项目</div><b>3</b></div>
+        <div class="card"><div class="meta">待审批申请人</div><b>12</b></div>
+        <div class="card"><div class="meta">签约中项目</div><b>2</b></div>
+      </div>
+      <div class="card" style="margin-top:14px;">
+        <p class="meta">技能标签：Midjourney / SD / ComfyUI / Kling / Runway（用于平台推荐匹配）。</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
