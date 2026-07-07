@@ -1,0 +1,9 @@
+{
+  "name": "西安霹雳火车队",
+  "short_name": "霹雳火",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07070a",
+  "theme_color": "#ff2d2d",
+  "description": "西安霹雳火车队官方数字化大本营"
+}
